@@ -196,3 +196,119 @@ Final decision:
 Do not replace sleep duration with sleep efficiency alone.
 Use sleep quality as the replacement bridge only after adding and testing the missing StudentLife and sleep-deprivation datasets.
 ```
+
+## StudentLife Bridge Tests
+
+### Download and file status
+
+Attempted dataset source:
+
+- Zenodo record: `https://zenodo.org/records/3529253`
+- Requested file: `dataset_rds.zip`
+- Requested local folder: `data/studentlife_rds/`
+
+Download attempts made in this environment:
+
+```text
+python urllib download → failed with proxy/tunnel 403 Forbidden
+curl download → failed with CONNECT tunnel 403 Forbidden
+```
+
+The requested StudentLife RDS archive could not be downloaded from this environment. I also checked the local `data/studentlife_rds/` folder after the failed download attempt. No target RDS files were available there.
+
+Files found locally:
+
+| requested file | found in `data/studentlife_rds/` | used in model |
+|---|---:|---:|
+| `phonelock.Rds` | no | no |
+| `Sleep.Rds` | no | no |
+| `Mood.Rds` | no | no |
+| `PerceivedStressScale.Rds` | no | no |
+| `Stress.Rds` | no | no |
+| `PAM.Rds` | no | no |
+
+Large-data handling:
+
+- Added `data/studentlife_rds/dataset_rds.zip` to `.gitignore`.
+- Added extracted StudentLife `.Rds` / `.rds` files under `data/studentlife_rds/` to `.gitignore`.
+- No large dataset ZIP or RDS file is committed.
+
+### Manual data preparation instructions
+
+Because the environment could not download the Zenodo file, prepare the dataset manually with these steps:
+
+1. Open `https://zenodo.org/records/3529253` in a browser.
+2. Download `dataset_rds.zip`.
+3. Place it at:
+
+```text
+data/studentlife_rds/dataset_rds.zip
+```
+
+4. Run the notebook:
+
+```text
+python -m jupyter nbconvert --to notebook --execute studentlife_bridge_model_analysis.ipynb --inplace
+```
+
+The notebook will extract the archive when needed, search recursively for the requested RDS files, read them with `pyreadr`, and test the bridge paths only from variables present in the files.
+
+### A. Screen time / phone use → sleep quality
+
+Status: **not tested**.
+
+Reason:
+
+- `phonelock.Rds` was not available.
+- `Sleep.Rds` was not available.
+- Therefore no phone-use variables could be joined to sleep quality variables.
+
+Decision: **not usable yet**.
+
+No support is claimed for screen time / phone use → sleep quality until the StudentLife files are present and a model beats the baseline mean model.
+
+### B. Sleep quality → mood
+
+Status: **not tested**.
+
+Reason:
+
+- `Sleep.Rds` was not available.
+- `Mood.Rds` was not available.
+- Therefore no sleep quality variables could be joined to mood variables.
+
+Decision: **not usable yet**.
+
+No support is claimed for sleep quality → mood until the StudentLife files are present and a model beats the baseline mean model.
+
+### C. Sleep quality → stress
+
+Status: **not tested**.
+
+Reason:
+
+- `Sleep.Rds` was not available.
+- `PerceivedStressScale.Rds` was not available.
+- `Stress.Rds` was not available.
+- Therefore no sleep quality variables could be joined to stress variables.
+
+Decision: **not usable yet**.
+
+No support is claimed for sleep quality → stress until the StudentLife files are present and a model beats the baseline mean model.
+
+### Is sleep quality now better supported as a replacement bridge?
+
+Current decision: **not yet**.
+
+Sleep quality remains a better conceptual bridge candidate than sleep efficiency alone, but the StudentLife bridge evidence is still missing because the RDS files could not be downloaded in this environment and were not already present locally.
+
+The replacement bridge should only be accepted after the StudentLife notebook can test the actual variables and show that at least one model beats the baseline for the relevant links.
+
+### Limitations
+
+- The Zenodo download was blocked by this environment with a proxy/tunnel `403 Forbidden` error.
+- No StudentLife RDS files were available locally after the failed download.
+- The StudentLife paths were not silently skipped; they are recorded here as not tested.
+- No `sleep_score` variable was used as evidence.
+- No causal claim is made.
+- No bridge connection is claimed unless it can be tested from real dataset variables and beat the baseline mean model.
