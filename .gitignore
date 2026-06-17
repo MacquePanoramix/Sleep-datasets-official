@@ -1,0 +1,4 @@
+# Large external StudentLife archive and extracted RDS data
+/data/studentlife_rds/dataset_rds.zip
+/data/studentlife_rds/**/*.Rds
+/data/studentlife_rds/**/*.rds
