@@ -2,3 +2,5 @@
 /data/studentlife_rds/dataset_rds.zip
 /data/studentlife_rds/**/*.Rds
 /data/studentlife_rds/**/*.rds
+/data/studentlife_rds/
+/dataset_rds.zip
