@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+scipy
+jupyter
+nbconvert
+pyreadr
+requests
+beautifulsoup4
+kagglehub
+openpyxl
