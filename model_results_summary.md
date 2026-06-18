@@ -361,3 +361,89 @@ The replacement bridge should only be accepted after the StudentLife notebook ca
 - No `sleep_score` variable was used as evidence.
 - No causal claim is made.
 - No bridge connection is claimed unless it can be tested from real dataset variables and beat the baseline mean model.
+
+## Cognitive Bridge Dataset Search
+
+### Search rules
+
+This search used the fixed evidence rules for the remaining cognitive outputs:
+
+- `sleep_score` is **not** used as evidence.
+- Sleep duration is treated as **secondary only**.
+- A bridge is only considered directly supportable when one dataset contains both:
+  - a sleep-quality bridge variable, and
+  - the cognitive output variable.
+- No dataset link is treated as a download link unless a public source directly provides or names it.
+
+Analysis file created:
+
+- `cognitive_sleep_quality_bridge_dataset_search.ipynb`
+
+### Candidate dataset table
+
+| dataset name | access link or data location | sleep bridge variables | output variables | can directly test the bridge? | limitations | recommended next action |
+|---|---|---|---|---|---|---|
+| Exploring the Alignment of Perceived and Measured Sleep Quality with Working Memory using Consumer Wearables | Paper/arXiv: `https://arxiv.org/abs/2507.19491`; DOI: `https://doi.org/10.1145/3745900.3746104`. The arXiv abstract says all experiment data are publicly available, but this search did not find a direct repository/download URL on the public landing pages checked. | Daily subjective sleep self-assessment; REM sleep / prior-night REM sleep; bedtimes; nocturnal heart rate. Sleep duration is secondary only. | N-back scores / working-memory task performance. | **Yes in principle** for sleep quality → memory, because the study directly contains subjective sleep assessment / REM metrics and N-back performance. **Not directly testable in this repo yet** because no raw file was downloaded. | Direct data URL was not located from the checked public pages. Small longitudinal sample reported in abstract: 29 participants over 4–8 weeks. Consumer wearable measurements are not clinical polysomnography. Need raw variable audit before modeling. | First-priority memory dataset. Contact authors or inspect ACM supplemental materials / arXiv source for the data package. If obtained, save only small derived metadata/results in the repo; do not commit large raw data. |
+| Cognitive Performance Measurements and the Impact of Sleep Quality Using Wearable and Mobile Sensors | Open-access article: `https://link.springer.com/article/10.1007/s00779-025-01847-7`; arXiv: `https://arxiv.org/abs/2501.15583`. The data availability statement says data will be made openly available on request. | Sleep latency; sleep restfulness; sleep phases; night-time heart rate/HRV; total sleep duration and time in bed as secondary. Exclude sleep score. | PVT reaction-test results; smartphone typing speed / milliseconds between keystrokes as a proxy or complementary cognitive-performance metric. | **Yes in principle** for sleep quality → reaction time / processing speed, because the paper reports a joined Reaction+Sleep dataset with previous-night sleep metrics and PVT results. **Not directly testable in this repo yet** because the data are available on request, not as an immediate public download found here. | Requires requesting access. PVT is alertness/reaction time, not memory. Typing speed is a proxy and should be secondary to PVT. Must exclude `sleep_score` even if present in raw Oura exports. | First-priority reaction-time dataset. Request the data from the authors. After access, model PVT from non-score sleep-quality variables first; use typing speed only as a secondary processing-speed proxy. |
+| MAUS: A Dataset for Mental Workload Assessment on N-back Task Using Wearable Sensor | IEEE DataPort landing/download referenced by baseline repo: `http://ieee-dataport.org/4216`; baseline code: `https://github.com/rickwu11/MAUS_dataset_baseline_system`; arXiv: `https://arxiv.org/abs/2111.02561`. | PSQI questionnaire / subjective sleep quality grouping. | N-back task responses / wrong amount / task performance. | **Likely yes** for PSQI + N-back if the IEEE DataPort data include participant-level PSQI and N-back response/performance files. **Not directly testable in this repo** because the DataPort dataset was not downloaded. | Small sample reported in public abstract: 22 subjects. DataPort access may require login/terms. Primarily a mental-workload dataset, not a sleep study. PSQI is baseline/global sleep quality, not daily prior-night sleep quality. | Backup memory dataset only. Download through IEEE DataPort if accessible, then audit whether PSQI scores can be joined to N-back accuracy/error variables by participant. |
+
+### Current decision for the fixed outputs
+
+#### Memory
+
+Recommended candidate:
+
+```text
+Exploring the Alignment of Perceived and Measured Sleep Quality with Working Memory using Consumer Wearables
+```
+
+Reason:
+
+- It directly targets subjective sleep self-assessment, measured sleep variables such as REM sleep, and N-back working-memory performance.
+- It is more relevant than MAUS for the installation because it is a sleep-quality and working-memory study, not mainly a workload-sensing study.
+
+Current decision:
+
+```text
+Do not use yet for installation formulas until the public raw data package is obtained and audited.
+```
+
+Backup:
+
+```text
+MAUS, only if PSQI can be joined to N-back accuracy/error variables in the downloaded files.
+```
+
+#### Reaction time / processing speed
+
+Recommended candidate:
+
+```text
+Cognitive Performance Measurements and the Impact of Sleep Quality Using Wearable and Mobile Sensors
+```
+
+Reason:
+
+- It directly contains prior-night wearable sleep metrics and PVT reaction-test results in a joined Reaction+Sleep dataset according to the article.
+- It also contains smartphone typing speed metrics that may support a secondary processing-speed proxy, but PVT should remain the primary output.
+
+Current decision:
+
+```text
+Do not use yet for installation formulas until the requested dataset is obtained and audited.
+```
+
+### Overall next action
+
+1. Request or locate the raw public data package for the working-memory wearable dataset.
+2. Request the Oura + PVT + typing dataset from the authors.
+3. Use MAUS only as a backup for `PSQI → N-back` if the first memory dataset cannot be obtained.
+4. After any dataset is obtained, create a modeling notebook that reports:
+   - rows used;
+   - baseline performance;
+   - model performance;
+   - coefficients or feature importance;
+   - final decision: use / do not use;
+   - installation formula only if the model is usable.
+
+No large datasets were committed.
