@@ -1,0 +1,6 @@
+path,output,target,status,decision
+A,memory,N_Back_Accuracy,dataset not found,do not use
+B,reaction time,PVT_Reaction_Time,dataset not found,do not use
+C,processing speed / attention,Stroop_Task_Reaction_Time,dataset not found,do not use
+D,stress,Stress_Level,dataset not found,do not use
+E,mood / emotion regulation,Emotion_Regulation_Score,dataset not found,do not use

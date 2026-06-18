@@ -197,6 +197,55 @@ Do not replace sleep duration with sleep efficiency alone.
 Use sleep quality as the replacement bridge only after adding and testing the missing StudentLife and sleep-deprivation datasets.
 ```
 
+
+## Sleep Quality to Output Tests
+
+### Dataset search
+
+Requested dataset:
+
+```text
+sleep_deprivation_dataset_detailed.csv
+```
+
+Recursive search result: **not found in this repository**.
+
+Because the dataset is missing, the requested output-side models could not be fitted without inventing data or connections. The analysis notebook still records the full test plan and produces a results table with conservative **do not use** decisions.
+
+Analysis files created:
+
+- `sleep_quality_output_model_analysis.ipynb`
+- `sleep_quality_output_model_results.csv`
+
+### Requested paths and decisions
+
+| path | predictors | target | output | rows used | baseline model | linear regression | stronger comparison | decision |
+|---|---|---|---|---:|---|---|---|---|
+| A | `Sleep_Quality_Score`, `Sleep_Hours`, `Daytime_Sleepiness` | `N_Back_Accuracy` | memory | 0 | not run | not run | not run | do not use |
+| B | `Sleep_Quality_Score`, `Sleep_Hours`, `Daytime_Sleepiness` | `PVT_Reaction_Time` | reaction time | 0 | not run | not run | not run | do not use |
+| C | `Sleep_Quality_Score`, `Sleep_Hours`, `Daytime_Sleepiness` | `Stroop_Task_Reaction_Time` | processing speed / attention | 0 | not run | not run | not run | do not use |
+| D | `Sleep_Quality_Score`, `Sleep_Hours`, `Daytime_Sleepiness` | `Stress_Level` | stress | 0 | not run | not run | not run | do not use |
+| E | `Sleep_Quality_Score`, `Sleep_Hours`, `Daytime_Sleepiness` | `Emotion_Regulation_Score` | mood / emotion regulation | 0 | not run | not run | not run | do not use |
+
+### Decision
+
+Current decision: **do not use sleep quality as output-side evidence from this dataset yet**.
+
+Reason:
+
+- The requested CSV was not present when searched recursively.
+- No rows were available for model training or testing.
+- No baseline, linear regression, or stronger comparison model can honestly beat a baseline without data.
+- Therefore no memory, reaction-time, processing-speed, stress, or emotion-regulation support is claimed from this dataset.
+
+When `sleep_deprivation_dataset_detailed.csv` is added, rerun:
+
+```text
+python -m jupyter nbconvert --to notebook --execute sleep_quality_output_model_analysis.ipynb --inplace
+```
+
+The notebook will test the baseline mean model, linear regression, and random forest comparison for each requested output, then save RMSE graphs to `Graphs/` when models can be fitted.
+
 ## StudentLife Bridge Tests
 
 ### Download and file status
