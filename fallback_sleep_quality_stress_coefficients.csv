@@ -1,0 +1,16 @@
+path,term,raw_coefficient,standardized_coefficient,training_mean,training_sd
+Quality of Sleep → Stress Level,Intercept,15.136409478252016,5.310714285714286,,
+Quality of Sleep → Stress Level,Quality of Sleep,-1.3361800164694342,-1.5688361925195338,7.353571428571429,1.1741203828694005
+Sleep Duration + Quality of Sleep → Stress Level,Intercept,15.273573661521109,5.310714285714286,,
+Sleep Duration + Quality of Sleep → Stress Level,Sleep Duration,-0.04881059279531443,-0.0383070944385426,7.149642857142857,0.7848110880189901
+Sleep Duration + Quality of Sleep → Stress Level,Quality of Sleep,-1.3073757646959545,-1.5350165333989894,7.353571428571429,1.1741203828694005
+Physical Activity Level → Quality of Sleep,Intercept,6.790610509777709,7.353571428571429,,
+Physical Activity Level → Quality of Sleep,Physical Activity Level,0.00935040083415836,0.19455638695083016,60.207142857142856,20.80727772012593
+Physical Activity Level + Daily Steps → Quality of Sleep,Intercept,7.834944339357099,7.353571428571429,,
+Physical Activity Level + Daily Steps → Quality of Sleep,Physical Activity Level,0.02729827288813805,0.5680027452632727,60.207142857142856,20.80727772012593
+Physical Activity Level + Daily Steps → Quality of Sleep,Daily Steps,-0.0003087590551988682,-0.4932042667207027,6882.142857142857,1597.3758774557575
+Physical Activity Level → Stress Level,Intercept,5.2362258812759706,5.310714285714286,,
+Physical Activity Level → Stress Level,Physical Activity Level,0.0012372021142916271,0.02574280798799287,60.207142857142856,20.80727772012593
+Quality of Sleep + Physical Activity Level → Stress Level,Intercept,14.59124302858967,5.310714285714286,,
+Quality of Sleep + Physical Activity Level → Stress Level,Quality of Sleep,-1.3776400713667105,-1.6175152880493102,7.353571428571429,1.1741203828694005
+Quality of Sleep + Physical Activity Level → Stress Level,Physical Activity Level,0.01411868898676888,0.29377148279178344,60.207142857142856,20.80727772012593

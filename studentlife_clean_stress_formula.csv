@@ -1,0 +1,2 @@
+path,target,predictor,rows_used,baseline_r2,baseline_mae,baseline_rmse,linear_train_r2,linear_test_r2,linear_mae,linear_rmse,beats_baseline,decision,standardized_formula,raw_formula,training_mean_sleep_quality_problem,training_sd_sleep_quality_problem
+C2: sleep quality only → stress,stress_score,sleep_quality_problem,46,-0.0013,4.875,6.2771,0.0418,0.0326,5.0238,6.1702,Yes,use with caution,stress_score = 18.2353 +1.3046 * z(sleep_quality_problem),stress_score = 15.4805 +3.1264 * sleep_quality_problem,0.8811,0.4173

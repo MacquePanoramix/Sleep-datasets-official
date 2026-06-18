@@ -1,0 +1,9 @@
+path,target,term,standardized_coefficient,raw_coefficient,training_mean,training_sd
+A: screen use → sleep quality,sleep_quality_problem,Intercept,0.92242973532549,0.863320337453964,,
+A: screen use → sleep quality,sleep_quality_problem,phone_use_proxy,0.02379103961828703,0.00031343914028206433,188.58333333333334,75.90321871377466
+B: sleep quality → mood,mood_score,Intercept,55.38110073346608,27.69109406644207,,
+B: sleep quality → mood,mood_score,sleep_quality_problem,1.2606074683725188,3.710053384793071,0.9176414355414548,0.33978149035255173
+B: sleep quality → mood,mood_score,sleep_hours,2.6240493985390887,3.284802248086975,7.393293756788744,0.7988454708551481
+C: sleep quality → stress,stress_score,Intercept,18.235294117647058,31.140159549487834,,
+C: sleep quality → stress,stress_score,sleep_quality_problem,0.4815749665674528,1.1540598712388277,0.8811370909007356,0.4172876802747723
+C: sleep quality → stress,stress_score,sleep_hours,-1.6668364417514967,-1.9451344320757564,7.1572175989156674,0.8569260891509318
