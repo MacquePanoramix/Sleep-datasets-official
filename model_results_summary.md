@@ -85,3 +85,22 @@ Found public leads for cognitive-output data:
 ## Main limitation
 
 These models are observational. They can support an interactive installation formula, but they do not prove that changing one behavior causes a stress, mood, memory, or reaction-time change.
+
+## Sleep duration → cognitive bridge check (added)
+
+A new notebook, `sleep_duration_cognitive_bridge_analysis.ipynb`, tested whether **sleep duration** predicts memory or processing-speed outcomes more reliably than the current local cognitive CSV. The strict rule for this check is: **usable only if linear test R² > 0 and linear RMSE improvement is at least 5%**.
+
+| dataset | path | output | predictors | rows | baseline RMSE | linear RMSE | linear test R² | linear RMSE gain | random forest RMSE | random forest test R² | decision | formula | limitations |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|
+| Local cognitive CSV | Sleep_Hours → N_Back_Accuracy | memory | Sleep_Hours | 60 | 14.8735 | 14.7278 | -0.0142 | 0.98% | 14.9776 | -0.0489 | **do not use** | `not usable; tested formula: N_Back_Accuracy = 77.992707 -0.379989 * Sleep_Hours` | Fails strict rule: RMSE gain is below 5% and linear test R² is negative. |
+| Local cognitive CSV | Sleep_Hours → PVT_Reaction_Time | reaction time / attention | Sleep_Hours | 60 | 97.2644 | 101.0353 | -0.2574 | -3.88% | 104.2169 | -0.3378 | **do not use** | `not usable; tested formula: PVT_Reaction_Time = 417.881207 -12.996757 * Sleep_Hours` | Worse than the baseline mean model. |
+| Local cognitive CSV | Sleep_Hours → Stroop_Task_Reaction_Time | processing speed / attention | Sleep_Hours | 60 | 1.0006 | 1.0192 | -0.4422 | -1.85% | 1.1488 | -0.8323 | **do not use** | `not usable; tested formula: Stroop_Task_Reaction_Time = 3.070420 +0.058317 * Sleep_Hours` | Worse than the baseline mean model. |
+| NHANES sleep + cognitive files | sleep duration → memory / word recall | memory / word recall | sleep duration | 0 | n/a | n/a | n/a | n/a | n/a | n/a | **do not use** | `not available; NHANES XPT download blocked or absent` | Automatic download attempts for `SLQ_G`, `CFQ_G`, `SLQ_H`, and `CFQ_H` failed with `403 Forbidden`; no local NHANES XPT files were present to test. |
+| NHANES sleep + cognitive files | sleep duration → processing speed / DSST | processing speed / DSST | sleep duration | 0 | n/a | n/a | n/a | n/a | n/a | n/a | **do not use** | `not available; NHANES XPT download blocked or absent` | Automatic download attempts for `SLQ_G`, `CFQ_G`, `SLQ_H`, and `CFQ_H` failed with `403 Forbidden`; no local NHANES XPT files were present to test. |
+| NHANES sleep + cognitive files | sleep duration → verbal/category fluency | verbal/category fluency | sleep duration | 0 | n/a | n/a | n/a | n/a | n/a | n/a | **do not use** | `not available; NHANES XPT download blocked or absent` | Automatic download attempts for `SLQ_G`, `CFQ_G`, `SLQ_H`, and `CFQ_H` failed with `403 Forbidden`; no local NHANES XPT files were present to test. |
+
+### Decision from the sleep-duration cognitive bridge check
+
+- **Sleep duration should not be used as an installation predictor for memory, PVT reaction time, or Stroop / processing-speed outcomes from the local cognitive CSV.**
+- **NHANES cannot yet be claimed as support for memory, DSST / processing speed, or category fluency in this repo**, because the target files were not available after the automatic download check.
+- Therefore, this update does **not** support any claim that sleep duration predicts memory or processing speed under the strict rule.
